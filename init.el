@@ -2,6 +2,21 @@
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file 'noerror)
 
+;; 2 space tabs
+(setq-default tab-width 2)
+(setq-default indent-tabs-mode nil)
+
+;; I can't type y-e-s all the time
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;; Show line and column in the modeline
+(linum-mode t)
+(column-number-mode t)
+
+;; Command up and down to go to the beginning and end of a buffer
+(global-set-key (kbd "s-<up>") 'beginning-of-buffer)
+(global-set-key (kbd "s-<down>") 'end-of-buffer)
+
 ;; Set up PATH inside Emacs by reading from the shell's PATH
 (defun set-exec-path-from-shell-PATH ()
   (let ((path-from-shell (shell-command-to-string "TERM=vt100 $SHELL -i -c 'echo $PATH'")))
@@ -16,6 +31,7 @@
 ;; 	     '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/"))
+
 (package-initialize)
 
 (defvar df/packages '(better-defaults
