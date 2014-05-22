@@ -85,3 +85,46 @@
 
 ;; Projectile
 (projectile-global-mode)
+
+;; Cider/clojure
+(setq cider-repl-pop-to-buffer-on-connect nil) ;; don't send me to the repl on connect
+
+;; (defun cider-force-quit ()
+;;   (interactive)
+;;   (dolist (connection nrepl-connection-list)
+;;     (when connection
+;;       (nrepl-close connection)))
+;;   (message "All active nREPL connections were closed")
+;;   (cider-close-ancillary-buffers))
+
+;; (defun cider-switch-repl (project-root project-name server buffer)
+;;   (cd project-root)
+;;   (cider-jack-in)
+;;   (switch-to-buffer server)
+;;  (rename-buffer buffer)
+;;  (clojure-mode)
+;;   (make-directory (concat "~/tmp/emacs/" project-name) t)
+;;   (let ((fname (concat "~/tmp/emacs/" project-name (format "/%s" buffer))))
+;;     (when (file-exists-p fname)
+;;       (delete-file fname))
+;;     (write-file fname))
+;;   (cd project-root)
+;;   (bury-buffer))
+
+;; (defun cider-switch-project (project-root)
+;; ;  (interactive (list (ido-read-directory-name "Project Root: " (locate-dominating-file default-directory "project.clj"))))
+;;  (let ((project-name (file-name-nondirectory (directory-file-name project-root))))
+;;    (dolist (x (find-buffers "*nrepl-server"))
+;;      (mark-buffer-umodified x))
+;;    (cider-force-quit)
+;;      (when (equal current-prefix-arg nil)
+;;        (mapc 'kill-buffer (buffer-list)))
+;;       (switch-repl project-root project-name (format "*nrepl-server %s*" project-name) (format "*nrepl-server %s*" project-name))))
+
+;; (defun clojure-project-p (dir)
+;;   (locate-dominating-file dir "project.clj"))
+
+;; (add-hook 'projectile-switch-project-hook
+;;           (lambda ()
+;;             (when (clojure-project-p (projectile-project-root))
+;;               (cider-switch-project (projectile-project-root)))))
