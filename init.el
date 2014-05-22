@@ -1,3 +1,19 @@
+;; Utility functions
+(defun filter (condp lst)
+  (delq nil
+        (mapcar (lambda (x) (and (funcall condp x) x)) lst)))
+
+(defun list-buffer-names ()
+  (filter 'identity (mapcar (lambda (el) (buffer-name el)) (buffer-list))))
+
+(defun find-buffers (buffer)
+	(filter (lambda (b) (string-match buffer b)) (list-buffer-names)))
+
+(defun mark-buffer-umodified (buffer)
+	(when (get-buffer buffer)
+    (switch-to-buffer buffer)
+    (set-buffer-modified-p nil)))
+
 ;; Set customization file path
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file 'noerror)
