@@ -25,6 +25,9 @@
 (add-hook 'activate-mark-hook 'set-cursor-type-bar)
 (add-hook 'deactivate-mark-hook 'set-cursor-type-box)
 
+;; 90 character right margin
+(setq-default fill-column 90)
+
 ;; 2 space tabs
 (setq-default tab-width 2)
 (setq-default indent-tabs-mode nil)
