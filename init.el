@@ -65,7 +65,8 @@
                       clojure-test-mode
                       cider
                       bubbleberry-theme
-                      projectile))
+                      projectile
+                      dirtree))
 
 (dolist (p df/packages)
   (when (not (package-installed-p p))
