@@ -18,6 +18,13 @@
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file 'noerror)
 
+;; Use a box cursor by default but a bar when we're selecting a region
+(defun set-cursor-type-bar () (setq cursor-type 'bar))
+(defun set-cursor-type-box () (setq cursor-type 'box))
+
+(add-hook 'activate-mark-hook 'set-cursor-type-bar)
+(add-hook 'deactivate-mark-hook 'set-cursor-type-box)
+
 ;; 2 space tabs
 (setq-default tab-width 2)
 (setq-default indent-tabs-mode nil)
