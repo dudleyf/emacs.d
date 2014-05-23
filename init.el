@@ -66,7 +66,8 @@
                       cider
                       bubbleberry-theme
                       projectile
-                      dirtree))
+                      dirtree
+                      magit))
 
 (dolist (p df/packages)
   (when (not (package-installed-p p))
