@@ -43,6 +43,9 @@
 (global-set-key (kbd "s-<up>") 'beginning-of-buffer)
 (global-set-key (kbd "s-<down>") 'end-of-buffer)
 
+;; Dirtree
+(require 'dirtree)
+
 ;; Set up PATH inside Emacs by reading from the shell's PATH
 (defun set-exec-path-from-shell-PATH ()
   (let ((path-from-shell (shell-command-to-string "TERM=vt100 $SHELL -i -c 'echo $PATH'")))
