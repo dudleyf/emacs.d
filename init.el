@@ -18,6 +18,28 @@
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file 'noerror)
 
+;; Packages
+(require 'package)
+;; (add-to-list 'package-archives
+;;       '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/"))
+
+(package-initialize)
+
+(defvar df/packages '(better-defaults
+                      clojure-mode
+                      clojure-test-mode
+                      cider
+                      bubbleberry-theme
+                      projectile
+                      dirtree
+                      magit))
+
+(dolist (p df/packages)
+  (when (not (package-installed-p p))
+    (package-install p)))
+
 ;; Use a box cursor by default but a bar when we're selecting a region
 (defun set-cursor-type-bar () (setq cursor-type 'bar))
 (defun set-cursor-type-box () (setq cursor-type 'box))
@@ -54,27 +76,7 @@
 
 (when window-system (set-exec-path-from-shell-PATH))
 
-;; Packages
-(require 'package)
-;; (add-to-list 'package-archives
-;;       '("marmalade" . "http://marmalade-repo.org/packages/"))
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/"))
 
-(package-initialize)
-
-(defvar df/packages '(better-defaults
-                      clojure-mode
-                      clojure-test-mode
-                      cider
-                      bubbleberry-theme
-                      projectile
-                      dirtree
-                      magit))
-
-(dolist (p df/packages)
-  (when (not (package-installed-p p))
-    (package-install p)))
 
 ;; Font
 (when (eq system-type 'darwin)
