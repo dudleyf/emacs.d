@@ -68,6 +68,17 @@
 ;; Dirtree
 (require 'dirtree)
 
+(defun dirtree-toggle ()
+  (interactive)
+  (let ((buffer (car (find-buffers "*dirtree"))))
+  (if buffer
+      (progn
+        (delete-windows-on buffer)
+        (kill-buffer buffer))
+    (dirtree default-directory nil))))
+
+(global-set-key (kbd "s-1") 'dirtree-toggle)
+
 ;; Set up PATH inside Emacs by reading from the shell's PATH
 (defun set-exec-path-from-shell-PATH ()
   (let ((path-from-shell (shell-command-to-string "TERM=vt100 $SHELL -i -c 'echo $PATH'")))
@@ -81,7 +92,7 @@
 ;; Font
 (when (eq system-type 'darwin)
     (set-face-attribute 'default nil :family "Consolas")
-    (set-face-attribute 'default nil :height 200))
+    (set-face-attribute 'default nil :height 220))
 
 ;; No splash screen
 (setq inhibit-splash-screen t)
@@ -93,9 +104,11 @@
 (projectile-global-mode)
 
 ;; Cider/clojure
-(setq cider-repl-pop-to-buffer-on-connect nil) ;; don't send me to the repl on connect
+;(setq cider-repl-pop-to-buffer-on-connect nil) ;; don't send me to the repl on connect
+(setq clojure-defun-style-default-indent t)
 
-;; (defun cider-force-quit ()
+
+;; (Defun Cider-force-quit ()
 ;;   (interactive)
 ;;   (dolist (connection nrepl-connection-list)
 ;;     (when connection
