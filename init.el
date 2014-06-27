@@ -7,10 +7,10 @@
   (filter 'identity (mapcar (lambda (el) (buffer-name el)) (buffer-list))))
 
 (defun find-buffers (buffer)
-	(filter (lambda (b) (string-match buffer b)) (list-buffer-names)))
+  (filter (lambda (b) (string-match buffer b)) (list-buffer-names)))
 
 (defun mark-buffer-umodified (buffer)
-	(when (get-buffer buffer)
+  (when (get-buffer buffer)
     (switch-to-buffer buffer)
     (set-buffer-modified-p nil)))
 
@@ -123,10 +123,10 @@
 
 ;; Projectile
 (projectile-global-mode)
-;(define-key projectile-mode-map (kbd "s-d") 'projectile-find-dir)
-;(define-key projectile-mode-map (kbd "s-p") 'projectile-switch-project)
+                                        ;(define-key projectile-mode-map (kbd "s-d") 'projectile-find-dir)
+                                        ;(define-key projectile-mode-map (kbd "s-p") 'projectile-switch-project)
 (define-key projectile-mode-map (kbd "s-e") 'projectile-find-file)
-;(define-key projectile-mode-map (kbd "s-g") 'projectile-grep)
+                                        ;(define-key projectile-mode-map (kbd "s-g") 'projectile-grep)
 
 ;; Cider/clojure
                                         ;(setq cider-repl-pop-to-buffer-on-connect nil) ;; don't send me to the repl on connect
@@ -173,6 +173,8 @@
 ;;             (when (clojure-project-p (projectile-project-root))
 ;;               (cider-switch-project (projectile-project-root)))))
 
+
+;; indent-whole-buffer
 (defun indent-whole-buffer ()
   (interactive)
   (delete-trailing-whitespace)
@@ -181,3 +183,10 @@
 
 (global-set-key (kbd "s-i") 'indent-whole-buffer)
 (global-set-key (kbd "C-c i") 'indent-whole-buffer)
+
+;; Comments
+(global-set-key (kbd "s-/") 'comment-dwim)
+(global-set-key (kbd "C-c /") 'comment-dwim)
+
+;; lein run mode
+(require 'lein-run-mode)
