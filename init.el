@@ -31,15 +31,28 @@
                       clojure-mode
                       clojure-test-mode
                       cider
+                      cljsbuild-mode
                       bubbleberry-theme
                       projectile
                       dirtree
                       magit
-                      cljsbuild-mode))
+                      flx-ido
+                      smex))
 
 (dolist (p df/packages)
   (when (not (package-installed-p p))
     (package-install p)))
+
+;; ido (better file/buffer finding)
+(ido-mode 1)
+(ido-everywhere 1)
+(flx-ido-mode 1)
+(setq ido-use-faces nil)
+
+;; smex (better M-x)
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 ;; Use a box cursor by default but a bar when we're selecting a region
 (defun set-cursor-type-bar () (setq cursor-type 'bar))
