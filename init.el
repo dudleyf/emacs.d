@@ -18,6 +18,9 @@
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file 'noerror)
 
+;; Handmade lisp goes here
+(add-to-list 'load-path "~/.emacs.d/lisp")
+
 ;; Packages
 (require 'package)
 ;; (add-to-list 'package-archives
@@ -42,6 +45,11 @@
 (dolist (p df/packages)
   (when (not (package-installed-p p))
     (package-install p)))
+
+;; Magit
+
+(global-set-key (kbd "s-g") 'magit-status)
+(global-set-key (kbd "C-c g") 'magit-status)
 
 ;; ido (better file/buffer finding)
 (ido-mode 1)
@@ -92,6 +100,7 @@
       (dirtree default-directory nil))))
 
 (global-set-key (kbd "s-1") 'dirtree-toggle)
+(global-set-key (kbd "C-c 1") 'dirtree-toggle)
 
 ;; Set up PATH inside Emacs by reading from the shell's PATH
 (defun set-exec-path-from-shell-PATH ()
@@ -100,8 +109,6 @@
     (setq exec-path (split-string path-from-shell path-separator))))
 
 (when window-system (set-exec-path-from-shell-PATH))
-
-
 
 ;; Font
 (when (eq system-type 'darwin)
@@ -116,6 +123,10 @@
 
 ;; Projectile
 (projectile-global-mode)
+;(define-key projectile-mode-map (kbd "s-d") 'projectile-find-dir)
+;(define-key projectile-mode-map (kbd "s-p") 'projectile-switch-project)
+(define-key projectile-mode-map (kbd "s-e") 'projectile-find-file)
+;(define-key projectile-mode-map (kbd "s-g") 'projectile-grep)
 
 ;; Cider/clojure
                                         ;(setq cider-repl-pop-to-buffer-on-connect nil) ;; don't send me to the repl on connect
@@ -168,4 +179,5 @@
   (indent-region (point-min) (point-max) nil)
   (untabify (point-min) (point-max)))
 
-(global-set-key (kbd "M-s-l") 'indent-whole-buffer)
+(global-set-key (kbd "s-i") 'indent-whole-buffer)
+(global-set-key (kbd "C-c i") 'indent-whole-buffer)
