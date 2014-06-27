@@ -34,7 +34,8 @@
                       bubbleberry-theme
                       projectile
                       dirtree
-                      magit))
+                      magit
+                      cljsbuild-mode))
 
 (dolist (p df/packages)
   (when (not (package-installed-p p))
@@ -71,11 +72,11 @@
 (defun dirtree-toggle ()
   (interactive)
   (let ((buffer (car (find-buffers "*dirtree"))))
-  (if buffer
-      (progn
-        (delete-windows-on buffer)
-        (kill-buffer buffer))
-    (dirtree default-directory nil))))
+    (if buffer
+        (progn
+          (delete-windows-on buffer)
+          (kill-buffer buffer))
+      (dirtree default-directory nil))))
 
 (global-set-key (kbd "s-1") 'dirtree-toggle)
 
@@ -91,8 +92,8 @@
 
 ;; Font
 (when (eq system-type 'darwin)
-    (set-face-attribute 'default nil :family "Consolas")
-    (set-face-attribute 'default nil :height 220))
+  (set-face-attribute 'default nil :family "Consolas")
+  (set-face-attribute 'default nil :height 220))
 
 ;; No splash screen
 (setq inhibit-splash-screen t)
@@ -104,7 +105,7 @@
 (projectile-global-mode)
 
 ;; Cider/clojure
-;(setq cider-repl-pop-to-buffer-on-connect nil) ;; don't send me to the repl on connect
+                                        ;(setq cider-repl-pop-to-buffer-on-connect nil) ;; don't send me to the repl on connect
 (setq clojure-defun-style-default-indent t)
 
 
@@ -147,3 +148,11 @@
 ;;           (lambda ()
 ;;             (when (clojure-project-p (projectile-project-root))
 ;;               (cider-switch-project (projectile-project-root)))))
+
+(defun indent-whole-buffer ()
+  (interactive)
+  (delete-trailing-whitespace)
+  (indent-region (point-min) (point-max) nil)
+  (untabify (point-min) (point-max)))
+
+(global-set-key (kbd "M-s-l") 'indent-whole-buffer)
